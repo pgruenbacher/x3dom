@@ -101,7 +101,7 @@ x3dom.extend = function(f) {
 
 /**
  * Function x3dom.getStyle
- * 
+ *
  * Computes the value of the specified CSS property <tt>p</tt> on the
  * specified element <tt>e</tt>.
  *

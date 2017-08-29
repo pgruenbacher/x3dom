@@ -109,10 +109,10 @@ x3dom.Utils.createTexture2D = function(gl, doc, src, bgnd, crossOrigin, scale, g
 	doc.downloadCount++;
 
 	image.onload = function() {
-		
+
 		texture.originalWidth  = image.width;
 		texture.originalHeight = image.height;
-		
+
         if (scale)
 		    image = x3dom.Utils.scaleImage( image );
 
@@ -485,7 +485,6 @@ x3dom.Utils.createTextureCube = function(gl, doc, src, bgnd, crossOrigin, scale,
  * Initialize framebuffer object and associated texture(s)
  *****************************************************************************/
 x3dom.Utils.initFBO = function(gl, w, h, type, mipMap, needDepthBuf, numMrt) {
-    
 	var tex = gl.createTexture();
     tex.width  = w;
     tex.height = h;
@@ -531,7 +530,7 @@ x3dom.Utils.initFBO = function(gl, w, h, type, mipMap, needDepthBuf, numMrt) {
         }
         else {
             rb = gl.createRenderbuffer();
-            
+
             gl.bindRenderbuffer(gl.RENDERBUFFER, rb);
             gl.renderbufferStorage(gl.RENDERBUFFER, gl.DEPTH_COMPONENT16, w, h);
             gl.bindRenderbuffer(gl.RENDERBUFFER, null);
@@ -546,7 +545,7 @@ x3dom.Utils.initFBO = function(gl, w, h, type, mipMap, needDepthBuf, numMrt) {
             gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0 + i, gl.TEXTURE_2D, mrts[i], 0);
         }
     }
-    
+
     if(needDepthBuf && x3dom.caps.DEPTH_TEXTURE !== null) {
         gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.DEPTH_ATTACHMENT, gl.TEXTURE_2D, dtex, 0);
     }
@@ -555,13 +554,13 @@ x3dom.Utils.initFBO = function(gl, w, h, type, mipMap, needDepthBuf, numMrt) {
     }
 
     var status = gl.checkFramebufferStatus(gl.FRAMEBUFFER);
-	
+
     if (status != gl.FRAMEBUFFER_COMPLETE) {
         x3dom.debug.logWarning("[Utils|InitFBO] FBO-Status: " + status);
     }
 
     gl.bindFramebuffer(gl.FRAMEBUFFER, null);
-	
+
     return {
         fbo: fbo, dtex: dtex, rbo: rb,
         tex: tex, texTargets: mrts,
@@ -596,9 +595,9 @@ x3dom.Utils.getFileName = function(url)
 x3dom.Utils.isWebGL2Enabled = function()
 {
 	var canvas = document.createElement("canvas");
-	
+
 	var webgl2 = canvas.getContext("webgl2") || canvas.getContext("experimental-webgl2");
-	
+
 	return ( webgl2 ) ? true : false;
 };
 

@@ -66,12 +66,14 @@ x3dom.BinaryContainerLoader.setupBinGeo = function(shape, sp, gl, viewarea, curr
         pushBuffer: function(name, buf) {
             this[name] = buf;
 
-            if (--shape._webgl.internalDownloadCount == 0) {
+            // paul: for some reason internalDownloadCount < 0
+            // for simple geometries without textures or index.
+            if (--shape._webgl.internalDownloadCount <= 0) {
                 if (this.coord)
                     this.createMesh();
                 shape._nameSpace.doc.needRender = true;
             }
-            if (--shape._nameSpace.doc.downloadCount == 0)
+            if (--shape._nameSpace.doc.downloadCount <= 0)
                 shape._nameSpace.doc.needRender = true;
         },
 

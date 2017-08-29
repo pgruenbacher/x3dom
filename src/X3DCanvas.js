@@ -93,19 +93,19 @@ x3dom.X3DCanvas = function(x3dElem, canvasIdx)
     x3dom.caps.MOBILE = (navigator.appVersion.indexOf("Mobile") > -1);
 
     this.backend = this.x3dElem.getAttribute('backend');
-	
+
     this.backend = ( this.backend ) ? this.backend.toLowerCase() : 'none';
-        
+
 	this.canvas = this._createHTMLCanvas( x3dElem );
-	
+
 	this.canvas.parent = this;
-	
+
 	this.gl = this._initContext( this.canvas, (this.backend.search("desktop") >= 0),
 											  (this.backend.search("mobile") >= 0),
 											  (this.backend.search("flashie") >= 0),
 											  (this.backend.search("webgl2") >= 0));
 	this.backend = 'webgl';
-	
+
 	if (this.gl == null)
 	{
 		this.hasRuntime = false;
@@ -132,7 +132,7 @@ x3dom.X3DCanvas = function(x3dElem, canvasIdx)
 	 */
     this.showStat = x3dElem.getAttribute("showStat");
     this.stateViewer = new x3dom.States(x3dElem);
-	
+
 	if (this.showStat !== null && this.showStat == "true")
 	{
 		this.stateViewer.display(true);
@@ -140,8 +140,8 @@ x3dom.X3DCanvas = function(x3dElem, canvasIdx)
 
     this.x3dElem.appendChild(this.stateViewer.viewer);
 
-	
-	
+
+
     // progress bar
     this.showProgress = x3dElem.getAttribute("showProgress");
     this.progressDiv = this._createProgressDiv();
@@ -155,16 +155,16 @@ x3dom.X3DCanvas = function(x3dElem, canvasIdx)
     // disable touch events
     this.disableTouch = x3dElem.getAttribute("disableTouch");
     this.disableTouch = this.disableTouch ? (this.disableTouch.toLowerCase() == "true") : false;
-	
+
 	this.disableKeys = x3dElem.getAttribute("keysEnabled");
 	this.disableKeys = this.disableKeys ? (this.disableKeys.toLowerCase() == "true") : false;
-	
+
 	this.disableRightDrag = x3dElem.getAttribute("disableRightDrag");
 	this.disableRightDrag = this.disableRightDrag ? (this.disableRightDrag.toLowerCase() == "true") : false;
-	
+
 	this.disableLeftDrag = x3dElem.getAttribute("disableLeftDrag");
 	this.disableLeftDrag = this.disableLeftDrag ? (this.disableLeftDrag.toLowerCase() == "true") : false;
-	
+
 	this.disableMiddleDrag = x3dElem.getAttribute("disableMiddleDrag");
 	this.disableMiddleDrag = this.disableMiddleDrag ? (this.disableMiddleDrag.toLowerCase() == "true") : false;
 
@@ -255,22 +255,22 @@ x3dom.X3DCanvas.prototype.bindEventListeners = function() {
         if(!this.isMulti) {
 
             var pos = this.parent.mousePosition(evt);
-            
+
             if ( pos.x != that.lastMousePos.x || pos.y != that.lastMousePos.y ) {
                 that.lastMousePos = pos;
-                
+
                 this.mouse_drag_x = pos.x;
                 this.mouse_drag_y = pos.y;
 
                 if (this.mouse_dragging) {
-                    
+
                     if (evt.shiftKey) { this.mouse_button = 1; }
                     if (evt.ctrlKey)  { this.mouse_button = 4; }
                     if (evt.altKey)   { this.mouse_button = 2; }
-                    
+
                     if ( this.mouse_button == 1 && !this.parent.disableLeftDrag ||
                          this.mouse_button == 2 && !this.parent.disableRightDrag ||
-                         this.mouse_button == 4 && !this.parent.disableMiddleDrag ) 
+                         this.mouse_button == 4 && !this.parent.disableMiddleDrag )
                     {
                         this.parent.doc.onDrag(that.gl, this.mouse_drag_x, this.mouse_drag_y, this.mouse_button);
                     }
@@ -1006,7 +1006,6 @@ x3dom.X3DCanvas.prototype._watchForResize = function() {
         parseInt(x3dom.getStyle(this.canvas, "width")),
         parseInt(x3dom.getStyle(this.canvas, "height"))
     ];
-
     if ((this._current_dim[0] != new_dim[0]) || (this._current_dim[1] != new_dim[1])) {
         this._current_dim = new_dim;
         this.x3dElem.setAttribute("width", new_dim[0]+"px");
@@ -1118,7 +1117,7 @@ x3dom.X3DCanvas.prototype.tick = function(timestamp)
 		{
 			runtime.removeMeasurement('PICKING');
 		}
-                
+
 
         runtime.exitFrame( {"total": this._totalTime, "elapsed": this._elapsedTime} );
     }
